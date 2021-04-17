@@ -1,34 +1,12 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const DB = require('../boundaries/database')
+
+const router = express.Router();
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  const products = [
-    {
-      "name": "Apple iPhone XR (Red, 128 GB)",
-      "specs": "128 GB ROM | 15.49 cm (6.1 inch) Display 12MP Rear Camera | 7MP Front Camera A12 Bionic Chip Processor",
-      "price": "$750",
-      "image": "https://i.imgur.com/KFojDGa.jpg"
-    },
-    {
-      "name": "Apple iPhone XS (Silver, 64 GB)",
-      "specs": "64 GB ROM | 14.73 cm (5.8 inch) Super Retina HD Display 12MP + 12MP | 7MP Front Camera A12 Bionic Chip Processor",
-      "price": "$900",
-      "image": "https://i.imgur.com/KFojDGa.jpg"
-    },
-    {
-      "name": "Apple iPhone XS Max (Gold, 64 GB)",
-      "specs": "64 GB ROM | 16.51 cm (6.5 inch) Super Retina HD Display 12MP + 12MP | 7MP Front Camera A12 Bionic Chip Processor",
-      "price": "$900",
-      "image": "https://i.imgur.com/KFojDGa.jpg"
-    },
-    {
-      "name": "OnePlus 7 Pro (Almond, 256 GB)",
-      "specs": "Rear Camera|48MP (Primary)+ 8MP (Tele-photo)+16MP (ultrawide)| Front Camera|16 MP POP-UP Camera|8GB RAM|Android pie",
-      "price": "$1,200",
-      "image": "https://i.imgur.com/6IUbEME.jpg"
-    }
-  ]
+router.get('/', async function(req, res, next) {
+  const db = new DB()
+  const products = await db.getProduts()
   res.render('index', { products });
 });
 
