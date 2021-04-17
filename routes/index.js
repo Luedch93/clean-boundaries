@@ -1,12 +1,11 @@
 const express = require('express');
-const DB = require('../boundaries/database')
+const boundaries = require('../boundaries')
 
 const router = express.Router();
 
 /* GET home page. */
-router.get('/', async function(req, res, next) {
-  const db = new DB()
-  const products = await db.getProduts()
+router.get('/', async function(_, res) {
+  const products = await boundaries.db.getProduts()
   res.render('index', { products });
 });
 
